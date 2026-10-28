@@ -29,6 +29,50 @@ def check(name, actual, expected):
         "passed": actual == expected
     })
 
+def checker(profile):
+    for table, data in profile.items():
+        check(
+            f"row_count_{table}",
+            make_request(
+                f'SELECT COUNT(*) FROM core."{table}"'
+            )[0][0],
+            data["rows"]
+        )
+
+    check("order_summary_unique",
+        make_request("SELECT COUNT(*) = COUNT(DISTINCT order_id) FROM mart.order_summary")[0][0], True)
+
+    check("months",
+          make_request("SELECT COUNT(*) FROM mart.ans1")[0][0], 24)
+
+    check("zero_revenue_months",
+          make_request("SELECT COUNT(*) FROM mart.ans1 WHERE revenue = 0")[0][0], 1)
+
+    check("monthly_revenue",
+          make_request("SELECT SUM(revenue) FROM mart.ans1")[0][0], decimal.Decimal("13221498.11"))
+
+    check("top_seller",
+          make_request("SELECT MAX(revenue) FROM mart.ans2")[0][0], decimal.Decimal("226987.93"))
+
+    check("average_order_value",
+          make_request("SELECT average_order_value FROM mart.ans3")[0][0], decimal.Decimal("159.88"))
+
+    check("buyers",
+          make_request("SELECT buyers FROM mart.ans4")[0][0], 96096)
+
+    check("repeat_percent",
+          make_request("SELECT repeat_percent FROM mart.ans4")[0][0], decimal.Decimal("3.12"))
+
+    check("categories",
+          make_request("SELECT COUNT(*) FROM mart.ans5")[0][0], 74)
+
+    check("top_category",
+          make_request("SELECT MAX(revenue) FROM mart.ans5")[0][0], decimal.Decimal("1233131.72"))
+
+    check("category_revenue",
+          make_request("SELECT SUM(revenue) FROM mart.ans5")[0][0], decimal.Decimal("13221498.11"))
+
+
 
 def make_request(q, args=None):
     with conn.cursor() as c:
@@ -80,49 +124,10 @@ def main():
     build = '\n'.join(
         line for line in path_to_build.read_text().splitlines() if not line.startswith('\\')
     )
+    
     make_request(build)
 
-    for table, data in profile.items():
-        check(
-            f"row_count_{table}",
-            make_request(
-                f'SELECT COUNT(*) FROM core."{table}"'
-            )[0][0],
-            data["rows"]
-        )
-
-    check("order_summary_unique",
-        make_request("SELECT COUNT(*) = COUNT(DISTINCT order_id) FROM mart.order_summary")[0][0], True)
-
-    check("months",
-          make_request("SELECT COUNT(*) FROM mart.ans1")[0][0], 24)
-
-    check("zero_revenue_months",
-          make_request("SELECT COUNT(*) FROM mart.ans1 WHERE revenue = 0")[0][0], 1)
-
-    check("monthly_revenue",
-          make_request("SELECT SUM(revenue) FROM mart.ans1")[0][0], decimal.Decimal("13221498.11"))
-
-    check("top_seller",
-          make_request("SELECT MAX(revenue) FROM mart.ans2")[0][0], decimal.Decimal("226987.93"))
-
-    check("average_order_value",
-          make_request("SELECT average_order_value FROM mart.ans3")[0][0], decimal.Decimal("159.88"))
-
-    check("buyers",
-          make_request("SELECT buyers FROM mart.ans4")[0][0], 96096)
-
-    check("repeat_percent",
-          make_request("SELECT repeat_percent FROM mart.ans4")[0][0], decimal.Decimal("3.12"))
-
-    check("categories",
-          make_request("SELECT COUNT(*) FROM mart.ans5")[0][0], 74)
-
-    check("top_category",
-          make_request("SELECT MAX(revenue) FROM mart.ans5")[0][0], decimal.Decimal("1233131.72"))
-
-    check("category_revenue",
-          make_request("SELECT SUM(revenue) FROM mart.ans5")[0][0], decimal.Decimal("13221498.11"))
+    checker(profile)
 
     exports = {
         "ans1": "month",
