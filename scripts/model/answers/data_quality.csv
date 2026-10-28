@@ -1,0 +1,7 @@
+issue,affected
+categories_missing_translation,2
+delivered_missing_delivery_time,8
+orders_without_items,775
+orders_without_payments,1
+payment_total_difference_gt_cent,366
+products_missing_category,610

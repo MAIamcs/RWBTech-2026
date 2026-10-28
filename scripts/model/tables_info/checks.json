@@ -1,0 +1,116 @@
+[
+  {
+    "check": "row_count_orders",
+    "actual": 99441,
+    "expected": 99441,
+    "passed": true
+  },
+  {
+    "check": "row_count_order_items",
+    "actual": 112650,
+    "expected": 112650,
+    "passed": true
+  },
+  {
+    "check": "row_count_order_payments",
+    "actual": 103886,
+    "expected": 103886,
+    "passed": true
+  },
+  {
+    "check": "row_count_order_reviews",
+    "actual": 99224,
+    "expected": 99224,
+    "passed": true
+  },
+  {
+    "check": "row_count_products",
+    "actual": 32951,
+    "expected": 32951,
+    "passed": true
+  },
+  {
+    "check": "row_count_sellers",
+    "actual": 3095,
+    "expected": 3095,
+    "passed": true
+  },
+  {
+    "check": "row_count_customers",
+    "actual": 99441,
+    "expected": 99441,
+    "passed": true
+  },
+  {
+    "check": "row_count_product_category_translation",
+    "actual": 71,
+    "expected": 71,
+    "passed": true
+  },
+  {
+    "check": "order_summary_unique",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  },
+  {
+    "check": "months",
+    "actual": 24,
+    "expected": 24,
+    "passed": true
+  },
+  {
+    "check": "zero_revenue_months",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "check": "monthly_revenue",
+    "actual": "13221498.11",
+    "expected": "13221498.11",
+    "passed": true
+  },
+  {
+    "check": "top_seller",
+    "actual": "226987.93",
+    "expected": "226987.93",
+    "passed": true
+  },
+  {
+    "check": "average_order_value",
+    "actual": "159.88",
+    "expected": "159.88",
+    "passed": true
+  },
+  {
+    "check": "buyers",
+    "actual": 96096,
+    "expected": 96096,
+    "passed": true
+  },
+  {
+    "check": "repeat_percent",
+    "actual": "3.12",
+    "expected": "3.12",
+    "passed": true
+  },
+  {
+    "check": "categories",
+    "actual": 74,
+    "expected": 74,
+    "passed": true
+  },
+  {
+    "check": "top_category",
+    "actual": "1233131.72",
+    "expected": "1233131.72",
+    "passed": true
+  },
+  {
+    "check": "category_revenue",
+    "actual": "13221498.11",
+    "expected": "13221498.11",
+    "passed": true
+  }
+]
